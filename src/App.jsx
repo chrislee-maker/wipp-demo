@@ -556,268 +556,170 @@ function ChatWidget({ stafferName, representing, onShowDashboard }) {
 // ── PHASE 2: CAMPAIGN SITE ────────────────────────────────────────────────────
 
 function Phase2({ representing }) {
-  const [bannerVisible, setBannerVisible] = useState(true);
-
   const candidateName = extractCandidateName(representing);
   const candidateFirstName = candidateName.split(' ')[0];
-  const candidateInitials = getInitials(candidateName);
+  const candidateLastName = candidateName.split(' ').slice(1).join(' ') || candidateName;
 
-  const solutions = [
-    { Icon: Building2, title: 'Workers & Unions',
-      desc: 'Protect collective bargaining, expand apprenticeship programs, and ensure every working family earns a living wage.' },
-    { Icon: BookOpen, title: 'Education',
-      desc: 'Fully fund public schools, restore arts and trades programs, and pay educators what they deserve.' },
-    { Icon: Leaf, title: 'Environment',
-      desc: 'Invest in clean energy infrastructure and protect local land, water, and air for future generations.' },
-    { Icon: HeartPulse, title: 'Healthcare',
-      desc: 'Fight for affordable prescription drugs, expand access to care, and protect reproductive rights.' },
+  // Mantosh-style colors
+  const TEAL      = '#3A7D6B';
+  const NAVY      = '#152238';
+  const HERO_BG   = '#D6E8EF';
+  const MUTED_BG  = '#EEF4F7';
+  const GREEN_BTN = '#2BA87E';
+
+  // Mountain SVG layers (back → front, darkening)
+  const mountains = [
+    { color: '#B0C8D8', d: 'M0,220 C150,140 300,180 450,160 C600,140 750,100 900,130 C1050,160 1200,120 1400,100 L1400,400 L0,400 Z' },
+    { color: '#8AAFC4', d: 'M0,280 C120,220 260,200 400,220 C540,240 680,180 820,200 C960,220 1100,170 1400,190 L1400,400 L0,400 Z' },
+    { color: '#6E97B0', d: 'M0,320 C100,280 250,260 400,275 C550,290 700,250 850,265 C1000,280 1150,240 1400,255 L1400,400 L0,400 Z' },
+    { color: '#557E96', d: 'M0,355 C120,330 280,315 440,330 C600,345 760,315 920,330 C1080,345 1240,315 1400,330 L1400,400 L0,400 Z' },
   ];
 
-  const DARK = '#1C2333';
-  const SECTION = '#222E42';
-  const ACCENT = '#CBD5E1';
-  const FOOTER_BG = '#131923';
-
   return (
-    <div className="min-h-screen phase-enter" style={{ background: DARK }}>
+    <div className="min-h-screen phase-enter" style={{ background: '#fff', fontFamily: 'IBM Plex Sans, sans-serif' }}>
 
-      {/* Announcement bar */}
-      {bannerVisible && (
-        <div className="flex items-center justify-center px-6 py-2.5 text-xs font-semibold tracking-widest uppercase relative"
-          style={{ background: ACCENT, color: DARK }}>
-          Learn more about {candidateFirstName}'s platform
-          <ChevronRight className="w-3.5 h-3.5 ml-1 inline" />
-          <button onClick={() => setBannerVisible(false)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 transition-opacity hover:opacity-100 opacity-60">
-            <X className="w-3.5 h-3.5" style={{ color: DARK }} />
-          </button>
-        </div>
-      )}
-
-      {/* Nav */}
-      <nav className="sticky top-0 z-40" style={{ background: DARK, borderBottom: `1px solid rgba(203,213,225,0.15)` }}>
-        <div className="max-w-7xl mx-auto px-6 py-3.5 flex items-center justify-between gap-6">
-          <div className="flex-shrink-0">
-            <div className="font-bold text-xl tracking-tight uppercase"
-              style={{ color: ACCENT, fontFamily: 'IBM Plex Serif, serif' }}>
-              {candidateName}
-            </div>
-            <div className="text-xs tracking-widest uppercase mt-0.5" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '9px' }}>
-              {representing}
-            </div>
-          </div>
-
-          <div className="hidden lg:flex items-center gap-5 text-xs font-medium tracking-widest uppercase"
-            style={{ color: 'rgba(255,255,255,0.7)' }}>
-            {['Home', 'About', 'Platform', 'Events', 'Endorsements', 'Contact', 'Store'].map((l, i) => (
-              <a key={l} href="#" className="transition-colors"
-                style={i === 0 ? { color: ACCENT } : { color: 'rgba(255,255,255,0.7)' }}>
+      {/* ── Nav ── */}
+      <nav className="sticky top-0 z-40 bg-white" style={{ borderBottom: '1px solid #E5E7EB' }}>
+        <div className="max-w-7xl mx-auto px-8 py-3.5 flex items-center justify-between">
+          <div className="flex items-center gap-8 text-sm font-semibold tracking-widest uppercase"
+            style={{ color: NAVY }}>
+            {['Home', 'About', 'Issues', 'Join the Team', 'Media Kit'].map((l, i) => (
+              <a key={l} href="#"
+                style={{ color: i === 0 ? TEAL : NAVY, textDecoration: 'none' }}>
                 {l}
               </a>
             ))}
           </div>
-
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <button className="text-xs font-semibold tracking-widest uppercase px-5 py-2 transition-colors"
-              style={{ border: `1px solid ${ACCENT}`, color: ACCENT, background: 'transparent' }}>
-              Donate
-            </button>
-            <button className="text-xs font-semibold tracking-widest uppercase px-5 py-2 transition-colors"
-              style={{ border: `1px solid ${ACCENT}`, color: ACCENT, background: 'transparent' }}>
-              Volunteer
-            </button>
-          </div>
+          <button className="text-white text-sm font-bold px-7 py-2.5 transition-colors"
+            style={{ background: GREEN_BTN, borderRadius: 999 }}>
+            Donate
+          </button>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden" style={{ background: DARK, minHeight: '520px' }}>
-        {/* City skyline silhouette */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ opacity: 0.15 }}>
-          <svg viewBox="0 0 1400 400" preserveAspectRatio="xMidYMax meet"
-            className="absolute bottom-0 w-full" fill="rgba(255,255,255,0.5)">
-            <rect x="0"   y="200" width="80"  height="200"/><rect x="40"  y="140" width="50"  height="260"/>
-            <rect x="90"  y="180" width="70"  height="220"/><rect x="160" y="100" width="60"  height="300"/>
-            <rect x="220" y="160" width="90"  height="240"/><rect x="310" y="170" width="80"  height="230"/>
-            <rect x="390" y="90"  width="70"  height="310"/><rect x="460" y="150" width="60"  height="250"/>
-            <rect x="520" y="110" width="90"  height="290"/><rect x="610" y="170" width="70"  height="230"/>
-            <rect x="680" y="130" width="50"  height="270"/><rect x="730" y="200" width="80"  height="200"/>
-            <rect x="810" y="160" width="60"  height="240"/><rect x="870" y="100" width="75"  height="300"/>
-            <rect x="945" y="180" width="90"  height="220"/><rect x="1035" y="140" width="60" height="260"/>
-            <rect x="1095" y="190" width="80" height="210"/><rect x="1175" y="120" width="70" height="280"/>
-            <rect x="1245" y="160" width="90" height="240"/><rect x="1335" y="200" width="65" height="200"/>
-          </svg>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-16 flex items-center gap-12">
-          <div className="flex-1 min-w-0">
-            <h1 className="font-bold leading-none mb-2 uppercase tracking-tight"
-              style={{ fontFamily: 'IBM Plex Serif, serif', color: ACCENT, fontSize: '3.5rem' }}>
-              {candidateName}
-            </h1>
-            <h2 className="font-bold leading-none uppercase"
-              style={{ fontFamily: 'IBM Plex Serif, serif', color: '#FFFFFF', fontSize: '4rem', lineHeight: 1.05 }}>
-              Our Time.<br />Our Movement.
-            </h2>
-            <div className="flex items-center gap-4 mt-10">
-              {['Donate', 'Volunteer', 'Store'].map((label) => (
-                <button key={label}
-                  className="font-semibold tracking-widest uppercase px-8 py-3 text-sm transition-colors"
-                  style={{ border: `1px solid ${ACCENT}`, color: ACCENT, background: 'transparent', minWidth: 140 }}>
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Candidate photo placeholder */}
-          <div className="flex-shrink-0 overflow-hidden"
-            style={{ width: 380, height: 420, background: 'rgba(255,255,255,0.05)', border: `1px solid rgba(203,213,225,0.2)` }}>
-            <div className="h-full flex flex-col items-center justify-center gap-3">
-              <div className="w-24 h-24 rounded-full flex items-center justify-center text-3xl font-bold"
-                style={{ background: 'rgba(203,213,225,0.15)', color: ACCENT, border: `2px solid rgba(203,213,225,0.4)` }}>
-                {candidateInitials}
-              </div>
-              <p className="font-semibold text-sm" style={{ color: ACCENT }}>{candidateName}</p>
-              <p className="text-xs text-white opacity-50">{representing}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Meet candidate */}
-      <section className="py-20 px-8" style={{ background: SECTION }}>
-        <div className="max-w-7xl mx-auto flex items-center gap-16">
-          <div className="flex-1">
-            <h2 className="font-bold uppercase mb-5 leading-tight"
-              style={{ fontFamily: 'IBM Plex Serif, serif', color: ACCENT, fontSize: '2.5rem' }}>
-              Meet {candidateName}
-            </h2>
-            <p className="text-base leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.75)', maxWidth: 500 }}>
-              A commitment to community, hard work, and showing up for the people who need it most. These values form the foundation of this campaign — and they'll guide every decision made in office.
-            </p>
-            <button className="font-semibold tracking-widest uppercase px-6 py-3 text-sm transition-colors"
-              style={{ border: `1px solid ${ACCENT}`, color: ACCENT, background: 'transparent' }}>
-              Learn More
-            </button>
-          </div>
-
-          <div className="flex-shrink-0 overflow-hidden relative"
-            style={{ width: 500, height: 320, background: 'rgba(255,255,255,0.04)', border: `1px solid rgba(203,213,225,0.2)` }}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-14 h-14 rounded-full border-2 flex items-center justify-center cursor-pointer"
-                style={{ background: 'rgba(203,213,225,0.1)', borderColor: ACCENT }}>
-                <div className="w-0 h-0 ml-1"
-                  style={{ borderTop: '9px solid transparent', borderBottom: '9px solid transparent', borderLeft: `16px solid ${ACCENT}` }} />
-              </div>
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 px-5 py-4"
-              style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.6))' }}>
-              <p className="text-sm font-medium text-white">{candidateName} — Our Time, Our Movement</p>
-              <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.6)' }}>Campaign launch video</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Solutions */}
-      <section className="py-16 px-8" style={{ background: DARK, borderTop: `1px solid rgba(203,213,225,0.1)` }}>
-        <div className="max-w-7xl mx-auto">
-          <h2 className="font-bold uppercase mb-2 text-center"
-            style={{ fontFamily: 'IBM Plex Serif, serif', color: ACCENT, fontSize: '2.2rem' }}>
-            {candidateFirstName}'s Platform
-          </h2>
-          <p className="text-center text-sm mb-10" style={{ color: 'rgba(255,255,255,0.55)' }}>
-            A platform built on results, not rhetoric.
-          </p>
-          <div className="grid grid-cols-4 gap-4">
-            {solutions.map((s, i) => (
-              <div key={i} className="p-5 transition-colors hover:bg-opacity-80"
-                style={{ background: SECTION, border: `1px solid rgba(203,213,225,0.15)` }}>
-                <s.Icon className="w-5 h-5 mb-3" style={{ color: ACCENT }} />
-                <h3 className="font-semibold text-sm mb-2 uppercase tracking-wide" style={{ color: ACCENT }}>{s.title}</h3>
-                <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <button className="font-semibold tracking-widest uppercase px-6 py-3 text-sm transition-colors"
-              style={{ border: `1px solid ${ACCENT}`, color: ACCENT, background: 'transparent' }}>
-              Learn More
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Events */}
-      <section className="py-14 px-8" style={{ background: SECTION, borderTop: `1px solid rgba(203,213,225,0.1)` }}>
-        <div className="max-w-7xl mx-auto">
-          <h2 className="font-bold uppercase mb-8 text-center"
-            style={{ fontFamily: 'IBM Plex Serif, serif', color: ACCENT, fontSize: '2rem' }}>
-            Events
-          </h2>
-          <div className="grid grid-cols-3 gap-4">
-            {[
-              { month: 'APR', day: '5',  title: 'Community Town Hall',     location: 'City Community Center', time: '6:30 PM' },
-              { month: 'APR', day: '12', title: 'Neighborhood Canvass',    location: 'City Hall Plaza', time: '10:00 AM' },
-              { month: 'APR', day: '22', title: 'Earth Day Rally',         location: 'Riverfront Park', time: '12:00 PM' },
-            ].map((ev, i) => (
-              <div key={i} className="p-4 flex gap-4"
-                style={{ background: DARK, border: `1px solid rgba(203,213,225,0.2)`, borderLeft: `3px solid ${ACCENT}` }}>
-                <div className="text-center px-3 py-2 min-w-[50px] flex-shrink-0"
-                  style={{ background: 'rgba(203,213,225,0.08)', border: `1px solid rgba(203,213,225,0.2)` }}>
-                  <div className="text-xs font-semibold" style={{ color: ACCENT }}>{ev.month}</div>
-                  <div className="text-xl font-bold leading-none text-white">{ev.day}</div>
-                </div>
-                <div>
-                  <p className="font-semibold text-sm leading-snug text-white">{ev.title}</p>
-                  <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.55)' }}>{ev.location} · {ev.time}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Join Movement */}
-      <section className="py-14 px-8 text-center" style={{ background: DARK, borderTop: `1px solid rgba(203,213,225,0.1)` }}>
-        <h2 className="font-bold uppercase mb-3"
-          style={{ fontFamily: 'IBM Plex Serif, serif', color: ACCENT, fontSize: '2.5rem' }}>
-          Join the Movement
-        </h2>
-        <p className="text-sm mb-8 uppercase tracking-widest font-medium" style={{ color: 'rgba(255,255,255,0.5)' }}>
-          Our campaign is growing every day
-        </p>
-        <div className="flex items-center justify-center gap-4">
-          {['Donate', 'Volunteer', 'Store'].map((label) => (
-            <button key={label}
-              className="font-semibold tracking-widest uppercase px-8 py-3 text-sm transition-colors"
-              style={{ border: `1px solid ${ACCENT}`, color: ACCENT, background: 'transparent', minWidth: 140 }}>
-              {label}
-            </button>
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden" style={{ background: HERO_BG, minHeight: 380 }}>
+        {/* Mountain layers */}
+        <svg viewBox="0 0 1400 400" preserveAspectRatio="xMidYMax meet"
+          className="absolute bottom-0 left-0 w-full" style={{ height: '100%', pointerEvents: 'none' }}>
+          {mountains.map((m, i) => (
+            <path key={i} d={m.d} fill={m.color} />
           ))}
+        </svg>
+
+        {/* Logo badge */}
+        <div className="relative z-10 flex flex-col items-center pt-10 pb-20">
+          <div className="px-8 py-4 mb-4 text-center"
+            style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(2px)' }}>
+            {/* Text-based logo mock */}
+            <div className="font-black text-5xl tracking-tight leading-none"
+              style={{ color: '#1B4DFF', fontFamily: 'IBM Plex Sans, sans-serif', textTransform: 'uppercase', letterSpacing: '-1px' }}>
+              {candidateLastName || candidateName}
+            </div>
+            <div className="font-bold text-base mt-1"
+              style={{ background: '#3A8C4A', color: '#fff', padding: '2px 16px', display: 'inline-block' }}>
+              For CA-15
+            </div>
+          </div>
+
+          <h1 className="font-bold text-center mt-2" style={{ color: TEAL, fontSize: '3rem', lineHeight: 1.1 }}>
+            {candidateName} for Congress
+          </h1>
+          <h2 className="font-bold text-center mt-1" style={{ color: NAVY, fontSize: '1.5rem', letterSpacing: '0.04em' }}>
+            California's 15th District
+          </h2>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-8" style={{ background: FOOTER_BG, borderTop: `1px solid rgba(203,213,225,0.15)` }}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div>
-            <div className="font-bold text-base uppercase"
-              style={{ color: ACCENT, fontFamily: 'IBM Plex Serif, serif' }}>
-              {candidateName}
+      {/* ── QR / Listening Hour bar ── */}
+      <div className="flex items-center justify-center gap-5 py-6 px-8" style={{ background: MUTED_BG }}>
+        {/* QR code placeholder */}
+        <div className="flex-shrink-0"
+          style={{ width: 70, height: 70, border: '2px solid #333', background: '#fff', display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 1, padding: 4 }}>
+          {Array.from({ length: 49 }).map((_, i) => {
+            const on = [0,1,2,3,4,5,6,7,13,14,20,21,27,28,34,35,41,42,43,44,45,46,48].includes(i);
+            return <div key={i} style={{ background: on ? '#111' : '#fff', borderRadius: 0 }} />;
+          })}
+        </div>
+        <p style={{ color: '#333', maxWidth: 360, lineHeight: 1.6, fontSize: '0.95rem' }}>
+          Please scan the QR code or <a href="#" style={{ color: TEAL, textDecoration: 'underline' }}>click here</a> to attend a
+          Listening Hour with {candidateFirstName} every Monday, Wednesday, and Friday from 12 to 1PM PST
+        </p>
+      </div>
+
+      {/* ── "deserves better" section ── */}
+      <section className="py-16 px-8" style={{ background: '#fff' }}>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-black text-center mb-12"
+            style={{ color: NAVY, fontSize: '3.2rem', lineHeight: 1.1 }}>
+            CA-15 deserves better!
+          </h2>
+          <div className="flex gap-12 items-start">
+            {/* Candidate photo placeholder */}
+            <div className="flex-shrink-0 overflow-hidden"
+              style={{ width: 420, minHeight: 300, background: '#D4C5B0', position: 'relative' }}>
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-8">
+                <div className="w-32 h-32 rounded-full flex items-center justify-center text-4xl font-bold mb-2"
+                  style={{ background: 'rgba(0,0,0,0.2)', color: '#fff', border: '3px solid rgba(255,255,255,0.5)' }}>
+                  {getInitials(candidateName)}
+                </div>
+              </div>
             </div>
-            <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.3)' }}>Paid for by {representing}</p>
+            <div className="flex-1 pt-2">
+              <p className="text-lg leading-relaxed mb-5" style={{ color: '#2D3748' }}>
+                Our district faces a housing crisis, unaffordable healthcare, rising homelessness, and growing inequality — yet our incumbent Congressman Kevin Mullin has little to show for it.
+              </p>
+              <p className="text-lg leading-relaxed mb-5" style={{ color: '#2D3748' }}>
+                His biggest legislative marks? Prop 19, which stripped inheritance protections from working families and seniors. CA-15 needs a representative who actually fights for us — not one who flies under the radar while our communities fall behind.
+              </p>
+              <p className="text-lg leading-relaxed" style={{ color: '#2D3748' }}>
+                {candidateName} is running to fix that. A community-first candidate committed to housing affordability, universal healthcare, and real economic opportunity for every family in the 15th District.
+              </p>
+              <div className="flex gap-4 mt-8">
+                <button className="font-bold text-sm px-7 py-3 text-white"
+                  style={{ background: GREEN_BTN, borderRadius: 999 }}>
+                  Donate
+                </button>
+                <button className="font-bold text-sm px-7 py-3"
+                  style={{ border: `2px solid ${NAVY}`, color: NAVY, borderRadius: 999, background: 'transparent' }}>
+                  Learn More
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-5 text-xs font-medium uppercase tracking-widest"
-            style={{ color: 'rgba(255,255,255,0.4)' }}>
-            {['Volunteer', 'Donate', 'Store', 'Contact'].map((l) => (
-              <a key={l} href="#" style={{ color: 'rgba(255,255,255,0.4)' }}
-                onMouseEnter={e => e.target.style.color = ACCENT}
-                onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.4)'}>{l}</a>
+        </div>
+      </section>
+
+      {/* ── Issues ── */}
+      <section className="py-14 px-8" style={{ background: MUTED_BG }}>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-black text-center mb-10" style={{ color: NAVY, fontSize: '2.4rem' }}>
+            The Issues
+          </h2>
+          <div className="grid grid-cols-2 gap-5">
+            {[
+              { Icon: HeartPulse, title: 'Healthcare', desc: 'Universal healthcare with a single-payer system — no family should be one diagnosis away from bankruptcy.' },
+              { Icon: Building2,  title: 'Housing',    desc: 'Incentives and policies to make housing affordable for teachers, nurses, and working families across CA-15.' },
+              { Icon: BookOpen,   title: 'Education',  desc: 'Fully fund public schools and pay educators what they deserve.' },
+              { Icon: Leaf,       title: 'Climate',    desc: 'Invest in clean energy and protect our communities from the climate crisis.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-white p-6" style={{ border: `1px solid #D1D5DB`, borderLeft: `4px solid ${TEAL}` }}>
+                <div className="flex items-center gap-3 mb-2">
+                  <item.Icon className="w-5 h-5" style={{ color: TEAL }} />
+                  <h3 className="font-bold text-base" style={{ color: NAVY }}>{item.title}</h3>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: '#4B5563' }}>{item.desc}</p>
+              </div>
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="py-8 px-8 text-center" style={{ background: NAVY }}>
+        <p className="text-sm font-semibold" style={{ color: 'rgba(255,255,255,0.6)' }}>
+          Paid for by {representing} &nbsp;·&nbsp; Authorized by {candidateName}
+        </p>
       </footer>
     </div>
   );
