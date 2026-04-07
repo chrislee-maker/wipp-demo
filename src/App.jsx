@@ -71,34 +71,34 @@ const SCENARIOS = [
   {
     id: 'data', label: 'Data Collection', emoji: '🎯',
     messages: [
-      { role: 'user', text: "Hi, I have some concerns about what's happening in our neighborhood." },
-      { role: 'bot',  text: "I'd love to hear what's on your mind. Which town or city are you in? Knowing your area helps me connect your concerns with the most relevant work Jeromie is doing across MA-01." },
-      { role: 'user', text: "I'm in Springfield. The roads on our street are terrible and there's a new warehouse development that's going to make traffic even worse." },
-      { role: 'bot',  text: "Springfield — Jeromie has been spending a lot of time there, especially after the district lost $47 million in public school funding this year alone. Infrastructure is a huge issue he's hearing about across the city. I want to make sure I capture the full picture: when you mention the warehouse development, is this the proposed distribution center on Page Boulevard? And on the roads — are we talking potholes and surface damage, or mostly congestion during morning and evening rush?" },
-      { role: 'user', text: "Both, honestly. The potholes on Belmont Ave are bad, and that warehouse will add 300+ trucks a day to streets that already can't handle it." },
-      { role: 'bot',  text: "That context is really valuable — you're the 11th Springfield resident this month to flag the Page Boulevard project, which tells us this is a district-wide priority. Two quick questions so Jeromie's team can represent your view accurately: 1) Would you support the development if it came with a road improvement and traffic mitigation plan? 2) On a scale of 1–5, how bad is road safety on Belmont Ave right now? Jeromie's platform includes expanding public transportation and investing in local infrastructure across Western Mass — your input feeds directly into how he prioritizes that." },
+      { role: 'user', text: "Hi, I have some concerns about what's happening in our area." },
+      { role: 'bot',  text: "I'd love to hear what's on your mind. Which city or neighborhood are you in? Knowing your area helps me connect your concerns with what Mantosh is focused on across CA-15 — from Redwood City and San Mateo to Daly City and South San Francisco." },
+      { role: 'user', text: "I'm in Burlingame. Housing costs are insane — my kids' teachers can't afford to live anywhere near the school." },
+      { role: 'bot',  text: "Burlingame — that's exactly the story Mantosh hears across CA-15. When teachers, nurses, and first responders can't live in the communities they serve, something is badly broken. He's calling for real incentives and policies to make housing affordable and available — not just talk. Quick question: are you most concerned about the rental market, home purchase prices, or zoning that blocks new construction near transit?" },
+      { role: 'user', text: "All of it, honestly. Rents are up 40% in five years and nothing is being built that's actually affordable." },
+      { role: 'bot',  text: "That data point matters — you're echoing what residents across San Mateo County are telling us. Two quick questions so Mantosh's team can represent your view accurately: 1) Would you support upzoning near Caltrain stops if it came with affordability requirements? 2) On a scale of 1–5, how urgent is the housing issue for your household right now? Mantosh's platform calls for champion incentives and policies to make housing affordable and available — your input shapes how he prioritizes that in Washington." },
     ],
   },
   {
     id: 'action', label: 'Guide to Action', emoji: '📢',
     messages: [
-      { role: 'user', text: "I keep hearing about Jeromie's education platform. What's he actually proposing?" },
-      { role: 'bot',  text: "Great question. Jeromie spent 11 years as a public school teacher at Northampton High School, so this one is personal for him. His Solutions platform calls for fully funding public schools, paying teachers more, providing universal Pre-K, and making community college and vocational schooling tuition-free. He's also pushing to restore the Department of Education after it was abolished. What aspect matters most to you — are you a parent, an educator, or a concerned resident?" },
-      { role: 'user', text: "I'm a parent. My kids' school is overcrowded and they just cut the music program." },
-      { role: 'bot',  text: "As a parent experiencing that firsthand, your voice carries real weight. Which school do your kids attend? This year Massachusetts lost $108 million in public school funding — $47 million of that in Springfield alone — and Jeromie has been pulling together parents across Western Mass to speak out. Two concrete things that would move the needle: 1) Add your name to the parent coalition — takes about 30 seconds 2) Send us a one-sentence note about how the cuts have affected your kids. Would you like me to sign you up right now? I just need your name and email." },
-      { role: 'user', text: "Yes — Sarah Mitchell, sarah.m@email.com" },
-      { role: 'bot',  text: "Done, Sarah — you're in. Expect an email within 24 hours with details and talking points Jeromie's team has prepared. One more thing: delegations from the same school carry a lot of weight with state reps. Do you know 2–3 other parents at your school who'd come? I can send you a shareable invite link right now. A group from Forest Park Elementary showed up 15 strong last cycle and it directly shaped the committee vote." },
+      { role: 'user', text: "I keep hearing about Mantosh's healthcare platform. What's he actually proposing?" },
+      { role: 'bot',  text: "Great question. Mantosh has seen firsthand how a single diagnosis can financially devastate a family — and he believes that's unacceptable in the wealthiest country on earth. His platform calls for universal healthcare with a single-payer system, so no family in CA-15 is one medical bill away from bankruptcy. Are you asking as someone personally affected by healthcare costs, or are you a healthcare worker yourself?" },
+      { role: 'user', text: "I'm a nurse at Mills-Peninsula. We see patients delay care constantly because of cost." },
+      { role: 'bot',  text: "Your perspective is invaluable — nurses are on the front line of this crisis every day. The patients you're describing are exactly who Mantosh's single-payer push is designed to protect. Two concrete things that would move the needle right now: 1) Add your name to our healthcare coalition — takes about 30 seconds. 2) Send us a one-sentence story about what delayed care looks like from your side of the bed. Would you like me to sign you up? I just need your name and email." },
+      { role: 'user', text: "Yes — Maria Chen, maria.c@email.com" },
+      { role: 'bot',  text: "Done, Maria — you're in. Expect an email within 24 hours with coalition details and talking points Mantosh's team has prepared. One more thing: a delegation of healthcare workers from the same hospital carries enormous weight with elected officials. Do you know 2–3 colleagues who'd join you? I can send a shareable invite link right now." },
     ],
   },
   {
     id: 'donation', label: 'Guide to Donation', emoji: '💰',
     messages: [
-      { role: 'user', text: "I really like what Jeromie is doing on workers' rights and union issues." },
-      { role: 'bot',  text: "That's at the core of his campaign — Jeromie was a proud member of the Northampton Association of School Employees for over a decade and has been fighting for organized labor since his twenties. His platform includes passing the PRO Act, guaranteeing card check recognition, and extending labor rights to gig and misclassified workers. What resonates most with you: protecting collective bargaining, expanding union access, or the push to ban captive audience meetings?" },
-      { role: 'user', text: "The collective bargaining stuff. I'm a union electrician and our local has been trying to grow our apprenticeship program for years." },
-      { role: 'bot',  text: "That's exactly the kind of story Jeromie needs to tell. He's pushing for the PRO Act specifically because it would ban employer interference in organizing and end right-to-work laws that weaken locals like yours. He also wants to promote union access and neutrality agreements for federal contractors. Would you be open to a short testimonial? Real voices from the trades are how he makes the case to colleagues in Washington. Also, I want to be straight with you: Richie Neal is one of the top recipients of corporate PAC money in all of Congress — 75% of his funding comes from big banks and corporate lobbyists. Jeromie refuses all corporate money and runs entirely on grassroots donations. Even a $25 contribution helps him stay competitive against that. Would you like me to send the direct donation link?" },
-      { role: 'user', text: "Yeah, I can do $50 actually." },
-      { role: 'bot',  text: "That means a lot — thank you. Here's your secure link: [secure.actblue.com/donate/whalenforcongress]. Every dollar funds direct outreach across MA-01. And I wasn't kidding about the testimonial — Jeromie's team does regular calls with union members across the district. If you're up for a 10-minute conversation, it could end up shaping how he talks about labor on the trail. Can I pass your contact along?" },
+      { role: 'user', text: "I really like what Mantosh is saying about workers and wages." },
+      { role: 'bot',  text: "That's a core part of his platform — Mantosh believes if you work hard in CA-15, you should be able to build a secure future here. He's fighting to tie entry-level pay to no less than 1% of a CEO's total compensation, and to impose hard guardrails protecting workers from AI-related job losses. What resonates most with you — the wage floor proposal, AI job protection, or the push for dignified wages across industries?" },
+      { role: 'user', text: "The AI job protection. I work in tech and I've watched three rounds of layoffs in two years." },
+      { role: 'bot',  text: "You're living the exact problem Mantosh is trying to solve legislatively. Silicon Valley created the AI revolution — CA-15 should also lead on making sure workers aren't left behind by it. He's pushing for hard guardrails to protect workers from AI-related job losses, not as an afterthought, but as a first-order priority. I want to be straight with you: Mantosh runs a clean, representative campaign — no corporate PAC money. That means he's counting entirely on people like you. Even a $25 contribution keeps him competitive. Would you like me to send the direct donation link?" },
+      { role: 'user', text: "Yeah, I can do $50." },
+      { role: 'bot',  text: "That means a lot — thank you. Here's your secure link: [secure.actblue.com/donate/mantoshkumarcongress]. Note: per FEC guidelines, only US Citizens and Permanent Residents can contribute. Every dollar funds direct outreach across CA-15. And if you'd be willing to share your story about the layoffs — even a few sentences — it could shape how Mantosh talks about AI and workers on the trail. Can I pass your contact to his team?" },
     ],
   },
 ];
@@ -183,7 +183,7 @@ function Phase1({ onNext }) {
   const [selectedTone, setSelectedTone] = useState(1);
   const [copied, setCopied] = useState(false);
   const [stafferName, setStafferName] = useState('Alex Rivera');
-  const [representing, setRepresenting] = useState('Jeromie Whalen for Congress');
+  const [representing, setRepresenting] = useState('Mantosh for Congress');
   const [files, setFiles] = useState([
     { name: 'policy_platform_2026.pdf',   size: '2.4 MB' },
     { name: 'voting_record.csv',           size: '890 KB' },
